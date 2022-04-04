@@ -195,5 +195,34 @@ router.delete('/deletepersona/:COD_PERSONA', (req,res)=>{
         console.log(COD_PERSONA)
 });
 
+router.get('/ver_pregunta/:resp', (req,res)=>{
+    const {resp} = req.params;
+    mysqlConnection.query('SELECT * FROM ver_preguntas WHERE respuesta = ? ', [resp],(err,rows,fields)=>{
+        if(!err){
+            res.json(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+router.put('/actualizarrespuesta/:id_usuario', (req,res)=>{
+    const {
+        id,
+        respuesta
+
+    } = req.body;
+    const {id_usuario} = req.params;
+    const query=`CALL upd_respuesta(?,?,?);
+    `;
+    mysqlConnection.query(query, [id_usuario,id,respuesta
+        ], (err,rows,fields)=>{
+            if(!err){
+                res.json({Status: 'Cliente actualizado'});
+            }else{
+                console.log(err);
+            }
+        });
+});
 
 module.exports = router;

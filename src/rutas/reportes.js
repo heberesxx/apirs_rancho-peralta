@@ -49,5 +49,34 @@ router.get('/venta_ganado', async (req, res)=>{
     });
 });
 
+router.get('/compra_embriones', async (req, res)=>{
+  const v_fechas = req.query;
+  
+  const query = 'CALL READ_COMPRA_EMBRIONES(?,?)';
+  
+  mysqlConnection.query(query,[v_fechas.inicio,v_fechas.final],(err,rows,fields)=> {
+      if (!err){
+          res.json(rows);
+
+      }else{
+          console.log(err);
+      }
+  });
+});
+
+router.get('/compra_esperma', async (req, res)=>{
+  const v_fechas = req.query;
+  
+  const query = 'CALL READ_COMPRA_ESPERMA(?,?)';
+  
+  mysqlConnection.query(query,[v_fechas.inicio,v_fechas.final],(err,rows,fields)=> {
+      if (!err){
+          res.json(rows);
+
+      }else{
+          console.log(err);
+      }
+  });
+});
 
 module.exports = router;

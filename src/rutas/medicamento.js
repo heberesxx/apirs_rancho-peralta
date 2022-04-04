@@ -23,6 +23,9 @@ router.get('/medicamento/:cod_medicamento', (req, res) => {
         }
     });
 } );
++
+
+
 
 router.get('/medicamentos_orden', (req,res) => {
     mysqlConnection.query('SELECT * FROM medicamento_orden', (err, rows, fields) => {
