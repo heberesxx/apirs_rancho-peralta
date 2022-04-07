@@ -40,8 +40,9 @@ router.post("/insertarganado", (req, res) => {
     fierro,
     COD_RAZA,
     sexo_ganado,
+    fecha_nacimiento
   } = req.body;
-  const query = `CALL INS_GANADO(?,?,?,?,?,?,?,?,?);`;
+  const query = `CALL INS_GANADO(?,?,?,?,?,?,?,?,?,?);`;
   mysqlConnection.query(
     query,
     [
@@ -54,6 +55,7 @@ router.post("/insertarganado", (req, res) => {
       fierro,
       COD_RAZA,
       sexo_ganado,
+      fecha_nacimiento
     ],
     (err, rows, fields) => {
       if (!err) {
@@ -66,13 +68,13 @@ router.post("/insertarganado", (req, res) => {
 });
 //ACTUALIZAR GANADO
 router.put("/actualizarganado/:COD_REGISTRO_GANADO", (req, res) => {
-  const { NUM_ARETE,nombre_ganado,color_ganado,COD_RAZA, sexo_ganado,COD_ESTADO, lugar, peso, fierro } = req.body;
+  const { NUM_ARETE,nombre_ganado,color_ganado,COD_RAZA, sexo_ganado,COD_ESTADO, lugar, peso, fierro,fecha_nacimiento } = req.body;
   const { COD_REGISTRO_GANADO } = req.params;
 
-  const query = `CALL UPD_GANADO(?,?,?,?,?,?,?,?,?,?);`;
+  const query = `CALL UPD_GANADO(?,?,?,?,?,?,?,?,?,?,?);`;
   mysqlConnection.query(
     query,
-    [COD_REGISTRO_GANADO, NUM_ARETE,nombre_ganado,color_ganado,COD_RAZA, sexo_ganado, COD_ESTADO, lugar, peso, fierro],
+    [COD_REGISTRO_GANADO, NUM_ARETE,nombre_ganado,color_ganado,COD_RAZA, sexo_ganado, COD_ESTADO, lugar, peso, fierro,fecha_nacimiento],
     (err, rows, fields) => {
       if (!err) {
         res.json({ Status: "Ganado Actualizado" });
