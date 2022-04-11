@@ -89,5 +89,16 @@ router.put('/actualizar-medicamento/:COD_MEDICAMENTO', (req, res) => {
         }
     });
 });
+router.get('/ver_orden/:COD_MEDICAMENTO', (req,res)=>{
+    const { COD_MEDICAMENTO } = req.params;
+    mysqlConnection.query('SELECT * FROM ORDEN_TRABAJO WHERE COD_MEDICAMENTO = ?', [COD_MEDICAMENTO],(err,rows,fields)=>{
+        if(!err){
+            res.json(rows);
+        }else{
+            console.log(err);
+        }
+    });
+  })
+
 
 module.exports = router;
