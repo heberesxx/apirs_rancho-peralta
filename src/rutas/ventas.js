@@ -140,6 +140,20 @@ router.put("/cancelar_loteventa/:COD_VENTA", (req, res) => {
   });
 });
 
+
+router.put("/anular_loteventa/:COD_VENTA", (req, res) => {
+  const { COD_VENTA } = req.params;
+
+  const query = `CALL ANULAR_LOTE_VENTA(?);`;
+  mysqlConnection.query(query, [COD_VENTA], (err, rows, fields) => {
+    if (!err) {
+      res.json({ Status: "Lote Anulado" });
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 router.delete("/eliminaritem_venta/:COD_DETALLE_VENTA", (req, res) => {
   const { COD_DETALLE_VENTA } = req.params;
 
